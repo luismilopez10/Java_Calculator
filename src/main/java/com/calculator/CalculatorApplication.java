@@ -8,7 +8,7 @@ public class CalculatorApplication {
 
     static ISubtraction subtraction = (x, y) -> x-y;
 
-    static IMultiplication multiplication = (x,y) -> IntStream.iterate(Math.min(x,y) < 0 && Math.max(x,y) < 0 ? -Math.min(x,y) : Math.min(x,y), i -> i)
+    static IMultiplication multiplication = (x,y) -> IntStream.iterate(y < 0 && x < 0 ? -Math.min(x,y) : Math.min(x,y), i -> i)
             .limit(Math.abs(Math.max(x,y)))
             .reduce((cummulative, num) -> addition.calculateAddition(cummulative,num))
             .getAsInt();
@@ -25,7 +25,7 @@ public class CalculatorApplication {
 
         System.out.println("Subtraction: " + subtraction.calculateSubtraction(5,2));
 
-        System.out.println("Multiplication: " + multiplication.calculateMultiplication(5,7));
+        System.out.println("Multiplication: " + multiplication.calculateMultiplication(5,-7));
 
         System.out.println("Division: " + division.calculateDivision(10,2));
     }
